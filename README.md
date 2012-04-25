@@ -21,60 +21,61 @@ It is highly customisable and light-weight (33kb uncompressed).
 ```
 ## Options
 
-content: (*Required*)
+**content**: (*Required*)
   The content of the dialog. This can be a DOM element, an HTML string,
   JQuery object or another VanillaDialog object.
 
-overlayOpacity: (Float)
+**overlayOpacity**: (Float)
   The opacity of the background overlay
   default: 0.7
 
-overlayCss: (Object)
+**overlayCss**: (Object)
   A javascript object literal with css properties to apply to the overlay.
   default: null
 
-animateTime: (Integer)
+**animateTime**: (Integer)
   Global duration of animations.
   default: 200
 
-closeSelector: (String:selector)
+**closeSelector**: (String:selector)
   Convenience property to attach a click handler to the selected element(s)
   (within the dialog only) which will close the dialog.
   default: null
 
-onClose: (Function)
+**onClose**: (Function)
   Called before the dialog is closed. Retuning false from the handler will prevent 
   the dialog from closing.
   default: null
 
-onShow: (Function)
+**onShow**: (Function)
   Called after the dialog is shown.
   default: null
 
-onKeydown: (Function)
+**onKeydown**: (Function)
   Callback for key down on dialog. By returning false from this handler, you can override
   the default behaviour of the escape key (closing the dialog).
   default: null
 
-onOverlayClicked: (Function)
+**onOverlayClicked**: (Function)
   Called when the overlay is clicked. By returning false in this handler you can 
   override the default behaviour of clicking the overlay (closing the dialog).
   default: null
 
-classes: (Array)
+**classes**: (Array)
   An array of classes to apply to the container element.
   default: []
 
-css: (Object)
+**css**: (Object)
   Inline css styles to apply to the container element.
   default: {}
 
-offsets: (Object)
+**offsets**: (Object)
   Override the top, left, width, and height of the container.
   default: { { top : 0, left: 0, height: 0, width: 0 } }
 
 ## API functions
 
+For Example:
 ```javascript
   var dialog = $.VanillaDialog({
      content: '<a href="javascript:void(0)">Close</a>',
@@ -82,57 +83,58 @@ offsets: (Object)
   });
 ```
 
-Given the above, the *dialog* variable exposes the following methods:
+The **dialog** variable exposes the following methods:
 
-resize([transition]):
+**resize([transition])**:
   Causes the container to reevaluate the content dimensions and resize/reposition accordingly.
   If *transition* is true the process will be animated, otherwise the dialog will immediately "snap"
   into position. 
   This method is chainable.
 
-on(type, [selector, [data, [handler]]]): 
+**on(type, [selector, [data, [handler]]])**: 
   Binds event handlers to the content within the dialog as well as 
   VanillaDialog events (such as 'show').
   This method is chainable.
   
-off([events, [selector, [handler]]]):
+**off([events, [selector, [handler]]])**:
  Unbinds event handler from dialog content as well as VanilaDialog events.
  This method is chainable.
 
-getContent([content]):
+**getContent([content])**:
   Gets the dialog content, or if *content* is specified - the JQuerified version of that object.
   *content* can be a DOM element, HTML string, JQuery object, or another VanillaDialog.
   On failure, returns null
 
-getContentRect([$content]):
+**getContentRect([$content])**:
   Returns the dimensions (including padding, border and margin) of the current dialog content in the
   form of an object literal containing *top, left, width, height*.
 
-select(selector):
+**select(selector)**:
   Selects an element within the dialog and returns a jQuery object.
 
-setOptions(options):
+**setOptions(options)**:
   Sets the options for the dialog.
   This method is chainable.
 
-setContent(content):
+**setContent(content)**:
   Sets the content of the dialog. If the dialog is shown, the container will 'transition' to
   the new content. onShow callback is automatically called when this function succeeds.
   This method is chainable.
 
-show():
+**show()**:
   Shows the dialog and overlay (animated).
   This method is chainable.
 
-close():
+**close()**:
   Closes the dialog (animated).
   This method is chainable.
 
 ## API Events
 
-show: 
+**show**: 
   Triggered when dialog is shown - bind as follows: dialog.on('show', handler);
-close:
+
+**close**:
   Triggered when dialog is closed - bind as follows: dialog.on('close', handler);
 
 
