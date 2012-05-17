@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JQuery-VanillaDialog demo</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="all">
+  </head>
+  <body>
+    <header>
+      <h1>VanillaDialog DEMO</h1>
+    </header>
+    <div id="primary">
+      <aside>
+        <ul>
+          <li><a href="javascript:void(0);">Click here for dialog</a>
+        </ul>
+      </aside>
+      <div id="content" role="main"></div>
+    </div>
+    <footer></footer>
+    <script id="demo-template" type="text/x-vanilla-template">
+      <div> <!-- Div allows plugin to determine dimensions of inline anchors -->
+        <span id="close">X</span>
+        <span id="info"></span>
+        <a id="button-1" class="button" href="javascript:void(0);">Button 1</a><br/>
+        <a id="button-2" class="button" href="javascript:void(0);">Button 2</a><br/>
+        <a id="button-3" class="button" href="javascript:void(0);">Button 3</a>
+
+        <a id="switch-dialog" href="javascript:void(0);">Switch dialog</a>
+      </div>
+    </script>
+
+    <script id="demo-template2" type="text/x-vanilla-template">
+       <div style="background: #345467">
+         <p>Another hideous dialog!</p>
+         <img src="problem.jpg" />
+         <a id="go-back" class="button" href="javascript:void(0);">Click here to go back</a>
+       </div>
+    </script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="../jquery-vanilladialog.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      (function($, document) {
+        var html = document.getElementById('demo-template').innerHTML,
+        dialog = $.VanillaDialog({
+          content: html,
+
+          classes: ['dialog'],
+
+          closeSelector: '#close',
+
+          onShow: function() {
+            var self = this;
+            this.select('.button').on('click', function() {
+              self.select('#info').html(this.id+' Clicked!');
+              // The size of the content has changed so we need to tell VanillaDialog
+              // to reevaluate and transition into the new dimensions.
+              self.resize(true);
+            });
+
+            this.select('#switch-dialog').on('click', function() {
+              // Here we want to set the content of the dialog and transition into the new content.
+              // I have abstracted this kind of interaction for simplicity it in another class when using 
+              // VanillaDialog in a project. Unfortunately for now it is a little complex.
+              // I will think about integrating the "swapping" functionality into VanillaDialog API
+
+              // Get new HTML
+              var html2 = document.getElementById('demo-template2').innerHTML,
+              // Perserve old onShow callback
+              oldOnShow = self.options.onShow,
+              // New onShow callback
+              newOnShow = function() {
+                this.select('#go-back').on('click', function() {
+                  // Restore old dialog
+                  self.setOptions({onShow: oldOnShow}).setContent(html);
+                })
+              };
+
+              // Set new dialog
+              self.setOptions({onShow: newOnShow}).setContent(html2);
+            });
+          } 
+        });
+
+        $('aside li').on('click', function() { dialog.show(); });
+      })(jQuery.noConflict(), this.document);
+    </script>
+  </body>
+</html>
