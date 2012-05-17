@@ -1,5 +1,7 @@
 # jquery-vanilladialog.js
 
+[Crusty Demo](http://sdbondi.github.com/jquery-vanilladialog/demo/index.html)
+
 A JQuery plugin which gives you completely vanilla container (div) in which to insert your dialog content. You decide what goes into the container (any html) and it handles resizing.
 
 There is no support for "content types", it's job is to display what you give it in a centred, appropriately-sized container with a background overlay.
