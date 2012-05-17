@@ -1,16 +1,12 @@
 # jquery-vanilladialog.js
 
-A JQuery plugin which gives you an automatically resizing but completely vanilla
-container (div) in which to insert your dialog content. The intention is that you decide
-exactly what content goes in the container, whether that is plain html, embedded media
-such as a youtube video, or the result of an ajax request. 
+A JQuery plugin which gives you completely vanilla container (div) in which to insert your dialog content. You decide what goes into the container (any html) and it handles resizing.
 
-There is no support for "content types", it's job is to display what you give it in a
-centred, appropriately-sized container with a background overlay.
+There is no support for "content types", it's job is to display what you give it in a centred, appropriately-sized container with a background overlay.
 
-It will work with very little and simple code, but exposes an API which is intended to 
-work with your javascript to give you adequate control over your modal dialog while keeping
-what you most likely want to achieve easy-to-do.
+It will work with very little and simple code, but exposes an API which is intended to work with your javascript to give you adequate control over your modal dialog while keeping what you most likely want to achieve easy-to-do. This is geared towards people who know a bit about JavaScript.
+
+It is highly customisable and quite light-weight (33kb uncompressed).
 
 It is highly customisable and light-weight (33kb uncompressed).
 
