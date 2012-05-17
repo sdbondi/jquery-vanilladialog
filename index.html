@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Jquery-vanilladialog by sdbondi</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/sdbondi/jquery-vanilladialog">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Jquery-vanilladialog</h1>
+            <h2>A vanilla container for modal dialog content</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/sdbondi/jquery-vanilladialog/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/sdbondi/jquery-vanilladialog/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>jquery-vanilladialog.js</h1>
+
+<p>A JQuery plugin which gives you an automatically resizing but completely vanilla
+container (div) in which to insert your dialog content. The intention is that you decide
+exactly what content goes in the container, whether that is plain html, embedded media
+such as a youtube video, or the result of an ajax request. </p>
+
+<p>There is no support for "content types", it's job is to display what you give it in a
+centred, appropriately-sized container with a background overlay.</p>
+
+<p>It will work with very little and simple code, but exposes an API which is intended to 
+work with your javascript to give you adequate control over your modal dialog while keeping
+what you most likely want to achieve easy-to-do.</p>
+
+<p>It is highly customisable and light-weight (33kb uncompressed).</p>
+
+<h2>Usage</h2>
+
+<div class="highlight">
+<pre>   <span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">VanillaDialog</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+   <span class="nx">dialog</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</pre>
+</div>
+
+
+<h2>Options</h2>
+
+<p><strong>content</strong>: (<em>Required</em>)
+  The content of the dialog. This can be a DOM element, an HTML string,
+  JQuery object or another VanillaDialog object.</p>
+
+<p><strong>overlayOpacity</strong>: (Float)
+  The opacity of the background overlay
+  default: 0.7</p>
+
+<p><strong>overlayCss</strong>: (Object)
+  A javascript object literal with css properties to apply to the overlay.
+  default: null</p>
+
+<p><strong>animateTime</strong>: (Integer)
+  Global duration of animations.
+  default: 200</p>
+
+<p><strong>closeSelector</strong>: (String:selector)
+  Convenience property to attach a click handler to the selected element(s)
+  (within the dialog only) which will close the dialog.
+  default: null</p>
+
+<p><strong>onClose</strong>: (Function)
+  Called before the dialog is closed. Retuning false from the handler will prevent 
+  the dialog from closing.
+  default: null</p>
+
+<p><strong>onShow</strong>: (Function)
+  Called after the dialog is shown.
+  default: null</p>
+
+<p><strong>onKeydown</strong>: (Function)
+  Callback for key down on dialog. By returning false from this handler, you can override
+  the default behaviour of the escape key (closing the dialog).
+  default: null</p>
+
+<p><strong>onOverlayClicked</strong>: (Function)
+  Called when the overlay is clicked. By returning false in this handler you can 
+  override the default behaviour of clicking the overlay (closing the dialog).
+  default: null</p>
+
+<p><strong>classes</strong>: (Array)
+  An array of classes to apply to the container element.
+  default: []</p>
+
+<p><strong>css</strong>: (Object)
+  Inline css styles to apply to the container element.
+  default: {}</p>
+
+<p><strong>offsets</strong>: (Object)
+  Override the top, left, width, and height of the container.
+  default: { { top : 0, left: 0, height: 0, width: 0 } }</p>
+
+<h2>API functions</h2>
+
+<p>For Example:</p>
+
+<div class="highlight">
+<pre>  <span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">VanillaDialog</span><span class="p">({</span>
+     <span class="nx">content</span><span class="o">:</span> <span class="s1">'&lt;a href="javascript:void(0)"&gt;Close&lt;/a&gt;'</span><span class="p">,</span>
+     <span class="nx">closeSelector</span><span class="o">:</span> <span class="s1">'a'</span>
+  <span class="p">});</span>
+</pre>
+</div>
+
+
+<p>The <strong>dialog</strong> variable exposes the following methods:</p>
+
+<p><strong>resize([transition])</strong>:
+  Causes the container to reevaluate the content dimensions and resize/reposition accordingly.
+  If <em>transition</em> is true the process will be animated, otherwise the dialog will immediately "snap"
+  into position. 
+  This method is chainable.</p>
+
+<p><strong>on(type, [selector, [data, [handler]]])</strong>: 
+  Binds event handlers to the content within the dialog as well as 
+  VanillaDialog events (such as 'show').
+  This method is chainable.</p>
+
+<p><strong>off([events, [selector, [handler]]])</strong>:
+ Unbinds event handler from dialog content as well as VanilaDialog events.
+ This method is chainable.</p>
+
+<p><strong>getContent([content])</strong>:
+  Gets the dialog content, or if <em>content</em> is specified - the JQuerified version of that object.
+  <em>content</em> can be a DOM element, HTML string, JQuery object, or another VanillaDialog.
+  On failure, returns null</p>
+
+<p><strong>getContentRect([$content])</strong>:
+  Returns the dimensions (including padding, border and margin) of the current dialog content in the
+  form of an object literal containing <em>top, left, width, height</em>.</p>
+
+<p><strong>select(selector)</strong>:
+  Selects an element within the dialog and returns a jQuery object.</p>
+
+<p><strong>setOptions(options)</strong>:
+  Sets the options for the dialog.
+  This method is chainable.</p>
+
+<p><strong>setContent(content)</strong>:
+  Sets the content of the dialog. If the dialog is shown, the container will 'transition' to
+  the new content. onShow callback is automatically called when this function succeeds.
+  This method is chainable.</p>
+
+<p><strong>show()</strong>:
+  Shows the dialog and overlay (animated).
+  This method is chainable.</p>
+
+<p><strong>close()</strong>:
+  Closes the dialog (animated).
+  This method is chainable.</p>
+
+<h2>API Events</h2>
+
+<p><strong>show</strong>: 
+  Triggered when dialog is shown - bind as follows: dialog.on('show', handler);</p>
+
+<p><strong>close</strong>:
+  Triggered when dialog is closed - bind as follows: dialog.on('close', handler);</p>
+
+<h2>License</h2>
+
+<p>See the file <a href="https://github.com/sdbondi/JQuery-VanillaDialog/blob/master/LICENSE.txt">LICENSE</a></p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/sdbondi">sdbondi</a> can be found on <a href="https://github.com/sdbondi/jquery-vanilladialog">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
