@@ -10,8 +10,6 @@ It will work with very little and simple code, but exposes an API which is inten
 
 It is highly customisable and quite light-weight (33kb uncompressed).
 
-It is highly customisable and light-weight (33kb uncompressed).
-
 ## Usage
 ```javascript
    var dialog = $.VanillaDialog(options);
